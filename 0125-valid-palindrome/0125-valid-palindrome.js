@@ -2,13 +2,23 @@
  * @param {string} s
  * @return {boolean}
  */
-function isAlpha(c) {
-  return (c >= 65 && c <= 90) || (c >= 97 && c <= 122) || (c >= 48 && c<= 57);
-}
-var isPalindrome = function(s) {
-  // Remove non-alphanumeric characters and convert to lowercase
-    const cleanedString = s.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
 
-    // Check if the cleaned string is a palindrome
-    return cleanedString === cleanedString.split('').reverse().join('');
+var isPalindrome = function(s) {
+  var i = 0;
+  var j = s.length - 1;
+  var m = '';
+  var n = '';
+  while (i < j) {
+    m = s[i].toLowerCase();
+    n = s[j].toLowerCase();
+    if (!isLetterOrDigit(m)) i++;
+    else if (!isLetterOrDigit(n)) j--;
+    else if (m === n) { i++; j--; }
+    else return false;
+  }
+  return true;
+};
+
+var isLetterOrDigit = function (c) {
+  return (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9');
 };
